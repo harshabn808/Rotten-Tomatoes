@@ -3,7 +3,8 @@ Rotten-Tomatoes
 
 Rotten Tomatoes iOS
 
-**Time Taken: ** ~6 hours
+**Time Taken:** 
+~6 hours
 
 All mandatory stories completed -
 
@@ -16,7 +17,7 @@ All mandatory stories completed -
 
 **GIF WALKTHROUGH**
 
-
+![alt tag](https://raw.githubusercontent.com/harshabn808/Rotten-Tomatoes/master/RottenTomatoes.gif)
 
 
 **Libraries Used**
