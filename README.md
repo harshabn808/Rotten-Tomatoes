@@ -4,7 +4,7 @@ Rotten-Tomatoes
 Rotten Tomatoes iOS
 
 **Time Taken:** 
-~10 hours
+~12 hours
 
 All mandatory stories completed -
 
