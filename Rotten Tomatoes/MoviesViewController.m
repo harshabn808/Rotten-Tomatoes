@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *movies;
 @property (nonatomic, strong) DMRNotificationView *notificationView;
+@property (nonatomic, strong) NSString *movieAPIURL;
 
 @end
 
@@ -33,15 +34,21 @@
     return self;
 }
 
+- (id)initWithData:(NSString *)movieAPIURL {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        self.movieAPIURL = movieAPIURL;
+        self.title = @"Movies";
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.navigationController.navigationBar.translucent = NO;
     
-    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-
-
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -73,9 +80,8 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Loading Movies";
 
-    NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.movieAPIURL]];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (connectionError) {
             [self showNetworkError];
@@ -99,7 +105,7 @@
 
 }
 
-- (int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (long) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.movies.count;
 }
 
@@ -109,14 +115,11 @@
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     
     NSDictionary *movie = self.movies[indexPath.row];
+    [cell setMovieDetails:movie];
     
-    
-    cell.movieTitleLabel.text = movie[@"title"];
-    cell.synopsisLabel.text = movie[@"synopsis"];
-    
-    NSString *imageUrl = movie[@"posters"][@"thumbnail"];
-    NSURL *url = [NSURL URLWithString:imageUrl];
-    [cell.posterView setImageWithURL:url];
+    UIImageView *selectionView = [[UIImageView alloc]initWithFrame:cell.frame];
+    selectionView.backgroundColor = [UIColor grayColor];
+    cell.selectedBackgroundView = selectionView;
     
     return cell;
 }

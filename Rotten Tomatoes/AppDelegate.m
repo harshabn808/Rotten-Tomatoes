@@ -15,9 +15,23 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    MoviesViewController *vc = [[MoviesViewController alloc]init];
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nvc;
+    MoviesViewController *vc = [[MoviesViewController alloc] initWithData:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=g9au4hv6khv6wzvzgt55gpqs"];
+    UINavigationController *bo = [[UINavigationController alloc] initWithRootViewController:vc];
+    bo.tabBarItem.title = @"Box Office";
+    bo.tabBarItem.image = [UIImage imageNamed:@"boxoffice_tabbar"];
+    
+    MoviesViewController *vc2 = [[MoviesViewController alloc] initWithData:@"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs"];
+    UINavigationController *dvd = [[UINavigationController alloc]initWithRootViewController:vc2];
+    dvd.tabBarItem.title = @"Top Dvd";
+    dvd.tabBarItem.image = [UIImage imageNamed:@"dvd_tabbar"];
+
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers=@[bo, dvd];
+    tabBarController.tabBar.tintColor = [UIColor blackColor];
+    tabBarController.tabBar.translucent = false;
+    tabBarController.tabBar.barTintColor = [UIColor whiteColor];
+    
+    self.window.rootViewController = tabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

@@ -38,16 +38,19 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
 
-    self.movieTitleLabel.text = @"Movie Name";
-    self.movieSynopsisLabel.text = @"Movie Synopsis";
+    self.movieTitleLabel.text = self.movieData[@"title"];
+    self.movieSynopsisLabel.text = self.movieData[@"synopsis"];
+    
+    NSString *imageUrl = self.movieData[@"posters"][@"thumbnail"];
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL: url];
+    self.moviePosterView.image = [UIImage imageWithData: imageData];
+    
+    [self loadImage:[self.movieData valueForKeyPath:@"posters.original"] :self.moviePosterView];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     self.title = self.movieData[@"title"];
-    self.movieTitleLabel.text = self.movieData[@"title"];
-    self.movieSynopsisLabel.text = self.movieData[@"synopsis"];
-    
-    [self loadImage:[self.movieData valueForKeyPath:@"posters.original"] :self.moviePosterView];
 }
 
 -(void)viewDidLayoutSubviews {
@@ -58,11 +61,11 @@
     
     CGRect newFrame = self.contentView.frame;
     
-    newFrame.size.height = expectedLabelSize.height + 300;
+    newFrame.size.height = expectedLabelSize.height + 320;
     
     // put calculated frame into UILabel frame
     self.contentView.frame = newFrame;
-    
+
     self.movieScrollView.contentSize = self.contentView.bounds.size;
 }
 

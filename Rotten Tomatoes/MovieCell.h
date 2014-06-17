@@ -10,9 +10,7 @@
 
 @interface MovieCell : UITableViewCell
 
-
-@property (weak, nonatomic) IBOutlet UILabel *movieTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *synopsisLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *posterView;
+@property (strong, nonatomic) NSDictionary *movie;
+-(void) setMovieDetails:(NSDictionary *) movie;
 
 @end
