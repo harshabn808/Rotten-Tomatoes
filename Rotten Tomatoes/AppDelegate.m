@@ -27,7 +27,6 @@
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers=@[bo, dvd];
-    tabBarController.tabBar.tintColor = [UIColor blackColor];
     tabBarController.tabBar.translucent = false;
     tabBarController.tabBar.barTintColor = [UIColor whiteColor];
     
