@@ -13,6 +13,10 @@ All mandatory stories completed -
 * User sees loading state while waiting for movies API.
 * User sees error message when there's a networking error.
 * User can pull to refresh the movie list.
+* All images fade in (optional)
+* For the large poster, load the low-res image first, switch to high-res when complete (optional)
+* Customize the highlight and selection effect of the cell. (optional)
+* Add a tab bar for Box Office and DVD. (optional)
 
 **GIF WALKTHROUGH**
 
@@ -20,7 +24,8 @@ All mandatory stories completed -
 
 
 **Libraries Used**
- 1 AFNetworking
- 2 Reachability.h
- 3 DMRNotifications
- 4 MBProgressHUD
+
+1. AFNetworking
+2. Reachability.h
+3. DMRNotifications
+4. MBProgressHUD
